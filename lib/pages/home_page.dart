@@ -1,3 +1,4 @@
+import 'package:capstoe_frontend/widgets/card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,6 +8,6 @@ class HomeScreen extends StatelessWidget {
   final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("test"));
+    return Scaffold(body: BigCard());
   }
 }
