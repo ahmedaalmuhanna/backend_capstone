@@ -9,13 +9,11 @@ class Profile {
   String image;
   String username;
   String bio;
-  int user_id;
 
   Profile({
     required this.image,
     required this.username,
     required this.bio,
-    required this.user_id,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,16 +21,14 @@ class Profile {
       'image': image,
       'username': username,
       'bio': bio,
-      'user_id': user_id,
     };
   }
 
   factory Profile.fromMap(Map<String, dynamic> map) {
     return Profile(
-      image: map['image'] as String,
+      image: (map['image'] ?? "https://i.imgur.com/An7G9J1b.jpg") as String,
       username: map['user'] as String,
       bio: map['bio'] as String,
-      user_id: map['user_id'] as int,
     );
   }
 

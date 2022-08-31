@@ -50,7 +50,4 @@ class Report {
   }
 
   String toJson() => json.encode(toMap());
-
-  factory Report.fromJson(String source) =>
-      Report.fromMap(json.decode(source) as Map<String, dynamic>);
 }

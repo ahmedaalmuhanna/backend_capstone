@@ -4,11 +4,20 @@ import 'package:flutter/cupertino.dart';
 
 class ReportProvider extends ChangeNotifier {
   List<Report> myReport = [];
+  var isLoading = false;
 
   Future<void> getReportFromService() async {
     print("in provider");
-    myReport = await ReportService().getReports();
-    print("in provider2");
+    isLoading = true;
     notifyListeners();
+    try {
+      await Future.delayed(Duration(seconds: 20));
+
+      myReport = await ReportService().getReports();
+      print("in provider2");
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 }

@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:capstoe_frontend/models/report.dart';
+// import 'package:capstoe_frontend/models/report.dart';
 import 'package:capstoe_frontend/providers/reports_provider.dart';
-import 'package:capstoe_frontend/widgets/background_image.dart';
+// import 'package:capstoe_frontend/widgets/background_image.dart';
 import 'package:capstoe_frontend/widgets/main_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -70,23 +70,35 @@ class HomeScreen extends StatelessWidget {
 
         // ############ bottomNavigationBar ############ //
         body: Container(
-            width: 400,
-            alignment: Alignment.center,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                        "assets/images/cyber-network-1440x2560-internet-6k-18684.jpg"),
-                    fit: BoxFit.cover)),
-            child: FutureBuilder(
-              future: context.read<ReportProvider>().getReportFromService(),
-              builder: (((context, snapshot) {
-                print("inside the future");
-                return ListView.builder(
-                    itemCount: context.watch<ReportProvider>().myReport.length,
-                    itemBuilder: ((context, index) => MainCard(
-                        myReport:
-                            context.watch<ReportProvider>().myReport[index])));
-              })),
-            )));
+          width: 400,
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                      "assets/images/cyber-network-1440x2560-internet-6k-18684.jpg"),
+                  fit: BoxFit.cover)),
+          child: context.watch<ReportProvider>().isLoading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemCount: context.watch<ReportProvider>().myReport.length,
+                  itemBuilder: ((context, index) => MainCard(
+                      myReport:
+                          context.watch<ReportProvider>().myReport[index]))),
+          // ElevatedButton(
+          // child:
+          //  Text("click me"),
+          // onPressed: context.read<ReportProvider>().getReportFromService,
+          // ),
+          // child: FutureBuilder(
+          //   future: context.read<ReportProvider>().getReportFromService(),
+          //   builder: (((context, snapshot) {
+          //     print("inside the future");
+          //     return ListView.builder(
+          //         itemCount: context.watch<ReportProvider>().myReport.length,
+          //         itemBuilder: ((context, index) => MainCard(
+          //             myReport:
+          //                 context.watch<ReportProvider>().myReport[index])));
+          //   })),),
+        ));
   }
 }

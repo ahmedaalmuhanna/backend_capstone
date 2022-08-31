@@ -16,9 +16,9 @@ class ReportService {
     try {
       print("in try");
       Response myResponse =
-          await Client.dio.get("Reportlist/"); // path is the view path
+          await Client.dio.get("/Reportlist/"); // path is the view path
       myReport =
-          (myResponse.data as List).map((e) => Report.fromJson(e)).toList();
+          (myResponse.data as List).map((e) => Report.fromMap(e)).toList();
     } on DioError catch (error) {
       print("in error");
       print(error.message);
