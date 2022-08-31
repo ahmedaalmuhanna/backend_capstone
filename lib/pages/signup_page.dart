@@ -1,6 +1,7 @@
 import 'package:capstoe_frontend/models/user.dart';
 import 'package:capstoe_frontend/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SignupPage extends StatelessWidget {
@@ -23,7 +24,6 @@ class SignupPage extends StatelessWidget {
             TextField(
               decoration: const InputDecoration(hintText: 'email'),
               controller: emailController,
-              obscureText: true,
             ),
             TextField(
               decoration: const InputDecoration(hintText: 'Username'),
@@ -36,6 +36,7 @@ class SignupPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                context.push("/");
                 context.read<AuthProvider>().signup(User(
                     username: usernameController.text,
                     email: emailController.text,

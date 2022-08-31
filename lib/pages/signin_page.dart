@@ -37,7 +37,7 @@ class SigninPage extends StatelessWidget {
                     password: passwordController.text);
 
                 if (isSuccess) {
-                  context.pop();
+                  context.push("/");
                 }
               },
               child: const Text("Sign In"),

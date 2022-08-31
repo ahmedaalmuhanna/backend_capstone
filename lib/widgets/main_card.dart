@@ -67,23 +67,6 @@ class MainCard extends StatelessWidget {
 
               // ############ 2nd child in the main column - Report Details ########### //
 
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Reference: ",
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
-                    Text(
-                      myReport.reference,
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    )
-                  ],
-                ),
-              ), // ############ Reference
-
               // ############ Details
               Container(
                 width: 365,
@@ -100,13 +83,34 @@ class MainCard extends StatelessWidget {
                       Text(
                         myReport.details,
                         style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 51),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Reference: ",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0)),
+                            ),
+                            Flexible(
+                              child: Text(
+                                myReport.reference,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 0, 0, 0)),
+                                maxLines: 1,
+                              ),
+                            )
+                          ],
+                        ),
+                      ), // ############ Reference
                     ],
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 45),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
