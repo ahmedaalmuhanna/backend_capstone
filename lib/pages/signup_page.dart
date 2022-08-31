@@ -17,33 +17,35 @@ class SignupPage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            const Text("Sign Up"),
-            TextField(
-              decoration: const InputDecoration(hintText: 'email'),
-              controller: emailController,
-              obscureText: true,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Username'),
-              controller: usernameController,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Password'),
-              controller: passwordController,
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<AuthProvider>().signup(User(
-                    username: usernameController.text,
-                    email: emailController.text,
-                    password: passwordController.text));
-              },
-              child: const Text("Sign Up"),
-            )
-          ],
+        child: Container(
+          child: Column(
+            children: [
+              const Text("Sign Up"),
+              TextField(
+                decoration: const InputDecoration(hintText: 'email'),
+                controller: emailController,
+                obscureText: true,
+              ),
+              TextField(
+                decoration: const InputDecoration(hintText: 'Username'),
+                controller: usernameController,
+              ),
+              TextField(
+                decoration: const InputDecoration(hintText: 'Password'),
+                controller: passwordController,
+                obscureText: true,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<AuthProvider>().signup(User(
+                      username: usernameController.text,
+                      email: emailController.text,
+                      password: passwordController.text));
+                },
+                child: const Text("Sign Up"),
+              )
+            ],
+          ),
         ),
       ),
     );

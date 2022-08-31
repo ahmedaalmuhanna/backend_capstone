@@ -10,8 +10,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "assets/images/cyber-network-1440x2560-internet-6k-18684.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
       appBar: AppBar(
-        title: Text('Cybersecurity App'),
+        backgroundColor: Color.fromRGBO(0, 26, 44, 20),
+        title: Center(child: Text('Cybersecurity App')),
       ),
       drawer: Drawer(
           child: ListView(
