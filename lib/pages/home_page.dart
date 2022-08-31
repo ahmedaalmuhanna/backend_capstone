@@ -1,21 +1,46 @@
+
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:capstoe_frontend/widgets/background_image.dart';
 
 import 'package:capstoe_frontend/widgets/main_card.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
+
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
         // ############ appBar ############ //
-        appBar: AppBar(title: Center(child: Text("ProjectName"))),
+              appBar: AppBar(
+        title: Text('Cybersecurity App'),
+      ),
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          ListTile(
+            title: Text('Sign up'),
+            trailing: Icon(Icons.login),
+            onTap: () {
+              context.push("/signup");
+            },
+          ),
+          ListTile(
+            title: Text('Sign in'),
+            trailing: Icon(Icons.how_to_reg),
+            onTap: () {
+              context.push("/signin");
+            },
+          )
+        ],
+      )),
         // ############ appBar ############ //
 
         // ############ bottomNavigationBar ############ //
@@ -183,5 +208,6 @@ class HomeScreen extends StatelessWidget {
               ),
               // ############ main card ########### //
             )));
+
   }
 }

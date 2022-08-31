@@ -1,14 +1,23 @@
 import 'package:capstoe_frontend/pages/home_page.dart';
-import 'package:capstoe_frontend/providers/reports_provider.dart';
+
+import 'package:capstoe_frontend/pages/signin_page.dart';
+import 'package:capstoe_frontend/pages/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/auth_provider.dart';
+
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => ReportProvider(),
-    child: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
+
 }
 
 class MyApp extends StatelessWidget {
@@ -27,6 +36,13 @@ class MyApp extends StatelessWidget {
   final _router = GoRouter(routes: [
     GoRoute(
         path: '/', builder: (context, state) => HomeScreen()), // home adress
+    GoRoute(
+        path: '/signup',
+        builder: (context, state) => SignupPage()), // home adress
+    GoRoute(
+      path: '/signin',
+      builder: (context, state) => SigninPage(),
+    ),
     // GoRoute(
     //     path: '/signed_in',
     //     builder: (context, state) =>
