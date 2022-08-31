@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:capstoe_frontend/provider/auth_provider.dart';
+import 'package:capstoe_frontend/providers/auth_provider.dart';
 
 import '../models/user.dart';
 
