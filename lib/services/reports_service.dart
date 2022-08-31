@@ -11,8 +11,18 @@ class ReportService {
 
   // get all reports:
   Future<List<Report>> getReports() async {
-    Response myResponse = await Client.dio.get("path"); // path is the view path
-    // myReport = (myResponse.data as List).map((e) =>)
+    print("in service");
+
+    try {
+      print("in try");
+      Response myResponse =
+          await Client.dio.get("Reportlist/"); // path is the view path
+      myReport =
+          (myResponse.data as List).map((e) => Report.fromJson(e)).toList();
+    } on DioError catch (error) {
+      print("in error");
+      print(error.message);
+    }
 
     return myReport;
   }

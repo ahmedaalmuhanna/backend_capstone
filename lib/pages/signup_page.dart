@@ -1,5 +1,5 @@
 import 'package:capstoe_frontend/models/user.dart';
-import 'package:capstoe_frontend/provider/auth_provider.dart';
+import 'package:capstoe_frontend/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
