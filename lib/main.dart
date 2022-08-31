@@ -1,4 +1,5 @@
 import 'package:capstoe_frontend/pages/home_page.dart';
+
 import 'package:capstoe_frontend/pages/signin_page.dart';
 import 'package:capstoe_frontend/pages/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ void main() {
       child: MyApp(),
     ),
   );
+
 }
 
 class MyApp extends StatelessWidget {
