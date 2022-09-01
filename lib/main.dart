@@ -1,3 +1,9 @@
+
+import 'dart:async';
+
+import 'package:capstoe_frontend/models/report.dart';
+import 'package:capstoe_frontend/pages/add_report_page.dart';
+
 import 'package:capstoe_frontend/pages/home_page.dart';
 import 'package:capstoe_frontend/pages/signin_page.dart';
 import 'package:capstoe_frontend/pages/signup_page.dart';
@@ -9,11 +15,17 @@ import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 
 void main() {
+  var reportProvider = ReportProvider();
+
+  unawaited(reportProvider.getReportFromService());
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+
         ChangeNotifierProvider<ReportProvider>(create: (_) => ReportProvider()),
+
       ],
       child: MyApp(),
     ),
@@ -33,7 +45,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  final _router = GoRouter(routes: [
+  final _router = GoRouter(initialLocation: "/", routes: [
     GoRoute(
         path: '/', builder: (context, state) => HomeScreen()), // home adress
     GoRoute(
@@ -42,6 +54,10 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: '/signin',
       builder: (context, state) => SigninPage(),
+    ),
+    GoRoute(
+      path: '/adding-report',
+      builder: (context, state) => AddReportPage(),
     ),
     // GoRoute(
     //     path: '/signed_in',
