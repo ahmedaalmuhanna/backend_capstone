@@ -12,42 +12,41 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: AppBar(
-        title: const Text("Sign up"),
-      ),
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            const Text("Sign Up"),
-            TextField(
-              decoration: const InputDecoration(hintText: 'email'),
-              controller: emailController,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Username'),
-              controller: usernameController,
-            ),
-            TextField(
-              decoration: const InputDecoration(hintText: 'Password'),
-              controller: passwordController,
-              obscureText: true,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.push("/");
-                context.read<AuthProvider>().signup(User(
-                    username: usernameController.text,
-                    email: emailController.text,
-                    password: passwordController.text));
-              },
-              child: const Text("Sign Up"),
-            )
-          ],
-
+        appBar: AppBar(
+          title: const Text("Sign up"),
         ),
+        // resizeToAvoidBottomInset: false,
+        // body: Padding(
+        //   padding: const EdgeInsets.all(20.0),
+        //   child: Column(
+        //     children: [
+        //       const Text("Sign Up"),
+        //       TextField(
+        //         decoration: const InputDecoration(hintText: 'email'),
+        //         controller: emailController,
+        //       ),
+        //       TextField(
+        //         decoration: const InputDecoration(hintText: 'Username'),
+        //         controller: usernameController,
+        //       ),
+        //       TextField(
+        //         decoration: const InputDecoration(hintText: 'Password'),
+        //         controller: passwordController,
+        //         obscureText: true,
+        //       ),
+        //       ElevatedButton(
+        //         onPressed: () {
+        //           context.push("/");
+        //           context.read<AuthProvider>().signup(User(
+        //               username: usernameController.text,
+        //               email: emailController.text,
+        //               password: passwordController.text));
+        //         },
+        //         child: const Text("Sign Up"),
+        //       )
+        //     ],
+
+        //   ),
         resizeToAvoidBottomInset: false,
         body: Container(
             decoration: BoxDecoration(
@@ -160,6 +159,7 @@ class SignupPage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
+                          print('object');
                           context.read<AuthProvider>().signup(User(
                               username: usernameController.text,
                               email: emailController.text,
