@@ -26,7 +26,9 @@ class Profile {
 
   factory Profile.fromMap(Map<String, dynamic> map) {
     return Profile(
-      image: (map['image'] ?? "https://i.imgur.com/An7G9J1b.jpg") as String,
+      image: (map['image'] ??
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDUj0rFvp3xKhAlTWUwShvmYRzQWuLFQRukg&usqp=CAU")
+          as String,
       username: map['user'] as String,
       bio: map['bio'] as String,
     );

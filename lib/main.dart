@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:capstoe_frontend/models/report.dart';
+import 'package:capstoe_frontend/pages/add_report_page.dart';
 import 'package:capstoe_frontend/pages/home_page.dart';
 
 import 'package:capstoe_frontend/pages/signin_page.dart';
@@ -50,6 +51,10 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: '/signin',
       builder: (context, state) => SigninPage(),
+    ),
+    GoRoute(
+      path: '/adding-report',
+      builder: (context, state) => AddReportPage(),
     ),
     // GoRoute(
     //     path: '/signed_in',

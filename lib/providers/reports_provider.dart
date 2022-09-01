@@ -11,7 +11,7 @@ class ReportProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
     try {
-      await Future.delayed(Duration(seconds: 20));
+      await Future.delayed(Duration(seconds: 5));
 
       myReport = await ReportService().getReports();
       print("in provider2");
