@@ -9,11 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int myindex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +53,21 @@ class HomeScreen extends StatelessWidget {
 
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color.fromRGBO(0, 26, 44, 20),
+          onTap: (index) {
+            if (index == 0) {
+              context.go("/");
+              setState(() {
+                myindex = index;
+              });
+            }
+            if (index == 1) {
+              context.go("/adding-report");
+              setState(() {
+                myindex = index;
+              });
+            }
+          },
+          currentIndex: myindex,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -57,7 +76,6 @@ class HomeScreen extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.add,
-                color: Color.fromARGB(235, 0, 85, 255),
               ),
               label: 'Add',
             ),
@@ -84,21 +102,6 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: ((context, index) => MainCard(
                       myReport:
                           context.watch<ReportProvider>().myReport[index]))),
-          // ElevatedButton(
-          // child:
-          //  Text("click me"),
-          // onPressed: context.read<ReportProvider>().getReportFromService,
-          // ),
-          // child: FutureBuilder(
-          //   future: context.read<ReportProvider>().getReportFromService(),
-          //   builder: (((context, snapshot) {
-          //     print("inside the future");
-          //     return ListView.builder(
-          //         itemCount: context.watch<ReportProvider>().myReport.length,
-          //         itemBuilder: ((context, index) => MainCard(
-          //             myReport:
-          //                 context.watch<ReportProvider>().myReport[index])));
-          //   })),),
         ));
   }
 }

@@ -27,7 +27,8 @@ class MainCard extends StatelessWidget {
             // ############ main column ########### //
             children: [
               // ############ 1st child in the main column - top Row card ########### //
-              Card(
+              Container(
+                color: Colors.black12,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -100,6 +101,7 @@ class MainCard extends StatelessWidget {
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 0, 0, 0)),
                                 maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             )
                           ],
