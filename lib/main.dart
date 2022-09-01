@@ -1,9 +1,10 @@
+
 import 'dart:async';
 
 import 'package:capstoe_frontend/models/report.dart';
 import 'package:capstoe_frontend/pages/add_report_page.dart';
-import 'package:capstoe_frontend/pages/home_page.dart';
 
+import 'package:capstoe_frontend/pages/home_page.dart';
 import 'package:capstoe_frontend/pages/signin_page.dart';
 import 'package:capstoe_frontend/pages/signup_page.dart';
 import 'package:capstoe_frontend/providers/reports_provider.dart';
@@ -22,7 +23,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
-        ChangeNotifierProvider<ReportProvider>(create: (_) => reportProvider)
+
+        ChangeNotifierProvider<ReportProvider>(create: (_) => ReportProvider()),
+
       ],
       child: MyApp(),
     ),
