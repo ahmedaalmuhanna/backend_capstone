@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:capstoe_frontend/provider/auth_provider.dart';
+import 'package:capstoe_frontend/providers/auth_provider.dart';
 
 import '../models/user.dart';
 
@@ -29,21 +29,70 @@ class SigninPage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Center(
             child: Container(
+              height: 300,
               margin: new EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text("Sign In"),
-                  TextField(
-                    decoration: const InputDecoration(
-                        hintText: 'Username',
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(244, 9, 18, 85)))),
-                    controller: usernameController,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        margin: EdgeInsets.all(4.0),
+                        child: const Text(
+                          "",
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        )),
                   ),
                   TextField(
-                    decoration: const InputDecoration(hintText: 'Password'),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.white),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      hintText: 'Username',
+                      hintStyle: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.teal,
+                        ),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.security,
+                        color: Colors.white,
+                      ),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 0, 26, 44),
+                    ),
+                    controller: usernameController,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.white),
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      hintText: 'Password',
+                      hintStyle: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.teal,
+                        ),
+                      ),
+                      prefixIcon: const Icon(
+                        Icons.password,
+                        color: Colors.white,
+                      ),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 0, 26, 44),
+                    ),
                     controller: passwordController,
                     obscureText: true,
                   ),
@@ -54,10 +103,14 @@ class SigninPage extends StatelessWidget {
                           password: passwordController.text);
 
                       if (isSuccess) {
-                        context.pop();
+                        context.push("/");
                       }
                     },
-                    child: const Text("Sign In"),
+                    child: Text(
+                      "Sign In",
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    ),
                   )
                 ],
               ),

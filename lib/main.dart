@@ -1,17 +1,19 @@
 import 'package:capstoe_frontend/pages/home_page.dart';
 import 'package:capstoe_frontend/pages/signin_page.dart';
 import 'package:capstoe_frontend/pages/signup_page.dart';
+import 'package:capstoe_frontend/providers/reports_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'provider/auth_provider.dart';
+import 'providers/auth_provider.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
+        ChangeNotifierProvider<ReportProvider>(create: (_) => ReportProvider()),
       ],
       child: MyApp(),
     ),
