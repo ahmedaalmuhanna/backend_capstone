@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field, unused_local_variable
-
 import 'package:capstoe_frontend/services/client.dart';
 import 'package:dio/dio.dart';
 
@@ -16,9 +14,10 @@ class ReportService {
     try {
       print("in try");
       Response myResponse =
-          await Client.dio.get("/Reportlist/"); // path is the view path
+          await Client.dio.get("/api/reportlist/"); // path is the view path
       myReport =
           (myResponse.data as List).map((e) => Report.fromMap(e)).toList();
+      print(myReport[0].profile.username);
     } on DioError catch (error) {
       print("in error");
       print(error.message);
