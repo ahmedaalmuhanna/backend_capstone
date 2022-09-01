@@ -1,7 +1,10 @@
+import 'package:capstoe_frontend/models/report.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 // import 'package:capstoe_frontend/models/report.dart';
+
 import 'package:capstoe_frontend/providers/reports_provider.dart';
 // import 'package:capstoe_frontend/widgets/background_image.dart';
 import 'package:capstoe_frontend/widgets/main_card.dart';
@@ -22,11 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        // ############ appBar ############ //
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(0, 26, 44, 20),
-          title: Text('Cybersecurity App'),
+          title: Center(child: Text('Cybersecurity App')),
         ),
         drawer: Drawer(
             child: ListView(
@@ -47,10 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         )),
-        // ############ appBar ############ //
-
-        // ############ bottomNavigationBar ############ //
-
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Color.fromRGBO(0, 26, 44, 20),
           onTap: (index) {
@@ -85,8 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-
-        // ############ bottomNavigationBar ############ //
         body: Container(
           width: 400,
           alignment: Alignment.center,
