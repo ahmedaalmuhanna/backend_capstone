@@ -3,6 +3,8 @@
 import 'package:capstoe_frontend/models/report.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainCard extends StatelessWidget {
   final Report myReport;
@@ -14,142 +16,161 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // card container
-      // color: Colors.amber,
-      // width: 500,
-      height: 260,
+      height: 300,
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+          border: Border.all(color: Color.fromARGB(255, 0, 0, 0), width: 3),
+          borderRadius: BorderRadius.circular(10)),
       margin: EdgeInsets.all(20),
-
-      child: Card(
-        // ############ main card ########### //
-        child: Container(
-          child: Column(
-            // ############ main column ########### //
-            children: [
-              // ############ 1st child in the main column - top Row card ########### //
-              Container(
-                color: Colors.black12,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 60,
+            color: Colors.white,
+            child: Card(
+              child: Container(
+                width: 350,
+                // color: Color.fromARGB(255, 0, 26, 44),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 0, 26, 44),
+                    border: Border.all(
+                        color: Color.fromARGB(255, 0, 0, 0), width: 1),
+                    borderRadius: BorderRadius.circular(10)),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // ############ 1st Child is avatar############ //
-                    CircleAvatar(
-                        backgroundImage: NetworkImage(myReport.profile.image)
-
-                        //  AssetImage(
-                        //     "assets/images/cyber-network-1440x2560-internet-6k-18684.jpg"),
-                        ),
-                    // ############ 1st Child is avatar############ //
-
-                    // ############ 2nd chid is The username ############ //
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    Container(
+                      width: 80,
+                      child: CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(myReport.profile.image)),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      width: 60,
                       child: Text(
                         myReport.profile.username,
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            color: Color.fromARGB(255, 255, 255, 255)),
                       ),
                     ),
-                    // ############ 2nd chid is The username ############ //
-
-                    // ############ 3rd chid is The Title ########### //
-
-                    Padding(
-                      padding: const EdgeInsets.only(left: 110),
-                      child: Text(
-                        myReport.title,
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                      ),
-                    ),
-                    // ############ 3rd chid is The Title ########### //
                   ],
                 ),
               ),
-              // ############ 1st child in the main column - top Row card ########### //
-
-              // ############ 2nd child in the main column - Report Details ########### //
-
-              // ############ Details
+            ),
+          ),
+          Center(
+            child: Container(
+              child: Text(myReport.title,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Color.fromARGB(255, 0, 0, 0))),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: Text('Details:',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    color: Color.fromARGB(255, 0, 26, 44))),
+          ),
+          Container(
+            child: Text(myReport.details,
+                style: TextStyle(
+                    fontSize: 20.0, color: Color.fromARGB(255, 0, 0, 0))),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Container(
+            child: Flexible(
+              child: InkWell(
+                onTap: () {
+                  _launchUrl(myReport.reference);
+                },
+                child: Text('Reference',
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
+                      fontSize: 20.0,
+                      color: Color.fromARGB(255, 7, 116, 194),
+                    )),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
               Container(
-                width: 365,
-                height: 110,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Details: ",
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                margin: EdgeInsets.only(top: 15),
+                child: Text(myReport.time,
+                    style: TextStyle(
+                      fontSize: 10.0,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    )),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15, left: 90),
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/report-details', extra: myReport);
+                    print("test");
+                  },
+                  child: Container(
+                    width: 100,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 0, 0, 0),
+                          Color.fromARGB(255, 0, 26, 44),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      Text(
-                        myReport.details,
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 51),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Reference: ",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 0, 0, 0)),
-                            ),
-                            Flexible(
-                              child: Text(
-                                myReport.reference,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0)),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
-                          ],
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(5, 5),
+                          blurRadius: 10,
+                        )
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        'More Details',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ), // ############ Reference
-                    ],
+                      ),
+                    ),
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 45),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      myReport.time,
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    ),
-                    InkWell(
-                      child: Icon(
-                        Icons.edit,
-                        color: Color.fromARGB(255, 50, 113, 163),
-                      ),
-                      onTap: () {
-                        print("test");
-                      },
-                    ),
-                    InkWell(
-                      child: Icon(
-                        Icons.share,
-                        color: Color.fromARGB(255, 50, 113, 163),
-                      ),
-                      onTap: () {
-                        print("test");
-                      },
-                    ),
-                  ],
-                ),
-              )
-
-              // ############ Details
-
-              // ############ 2nd child in the main column - Report Details ########### //
             ],
-          ),
-        ),
+          )
+        ],
       ),
-      // ############ main card ########### //
     );
   }
 }
+
+Future<void> _launchUrl(String myURL) async {
+  Uri url = Uri.parse(myURL);
+  if (!await launchUrl(url)) {
+    throw 'Could not launch $myURL';
+  }
+}
+
+      // // ############ main card ########### //

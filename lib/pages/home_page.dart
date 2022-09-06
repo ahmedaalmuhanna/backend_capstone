@@ -1,102 +1,134 @@
-import 'package:capstoe_frontend/models/report.dart';
-
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-// import 'package:capstoe_frontend/models/report.dart';
-
-import 'package:capstoe_frontend/providers/reports_provider.dart';
-// import 'package:capstoe_frontend/widgets/background_image.dart';
-import 'package:capstoe_frontend/widgets/main_card.dart';
+import 'package:capstoe_frontend/pages/add_report_page.dart';
+import 'package:capstoe_frontend/pages/list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+import '../providers/auth_provider.dart';
 
+class HomePage extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int myindex = 0;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  late TabController controller;
+
+  @override
+  void initState() {
+    controller = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(0, 26, 44, 20),
-          title: Center(child: Text('Cybersecurity App')),
-        ),
-        drawer: Drawer(
-            child: ListView(
-          children: [
-            ListTile(
-              title: Text('Sign up'),
-              trailing: Icon(Icons.login),
-              onTap: () {
-                context.push("/signup");
-              },
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(0, 26, 44, 20),
+        title: Text('Cybersecurity App'),
+      ),
+      drawer: Drawer(
+          backgroundColor: Color.fromARGB(255, 0, 26, 44),
+          child: Consumer<AuthProvider>(
+              builder: ((context, auth, child) => ListView(
+                    children: context.read<AuthProvider>().user == null
+                        ? []
+                        : [
+                            UserAccountsDrawerHeader(
+                                accountName: Text(
+                                    "Welcome " +
+                                        context
+                                            .read<AuthProvider>()
+                                            .user!
+                                            .username +
+                                        " .. ",
+                                    style: TextStyle(
+                                        color: Color.fromARGB(
+                                            255, 48, 137, 201))), //Username
+
+                                currentAccountPicture: CircleAvatar(
+                                  child: ClipOval(
+                                      child: Image.network(
+                                    context.read<AuthProvider>().user!.image,
+                                    width: 90,
+                                    height: 90,
+                                    fit: BoxFit.cover,
+                                  )),
+                                ),
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            "https://static.vecteezy.com/system/resources/previews/000/690/000/original/blue-binary-cyber-circuit-future-technology-concept-background-vector.jpg"),
+                                        fit: BoxFit.cover)),
+                                accountEmail: Text(
+                                    context.read<AuthProvider>().user!.bio)),
+                            ListTile(
+                              title: Text('Profile',
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255))),
+                              trailing: Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
+                              onTap: () {
+                                context.push('/profile');
+                              },
+                            ),
+                            ListTile(
+                              title: Text(
+                                'Logout',
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Color.fromARGB(255, 255, 255, 255)),
+                              ),
+                              trailing: Icon(
+                                Icons.login,
+                                color: Colors.white,
+                              ),
+                              onTap: () async {
+                                context.read<AuthProvider>().logout();
+                                print(await context
+                                    .read<AuthProvider>()
+                                    .user!
+                                    .username);
+                                // context.go("/");
+
+                                context.replace('/');
+                              },
+                            ),
+                          ],
+                  )))),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: controller.index,
+        onTap: (i) => setState(() => controller.index = i),
+        backgroundColor: Color.fromRGBO(0, 26, 44, 20),
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
             ),
-            ListTile(
-              title: Text('Sign in'),
-              trailing: Icon(Icons.how_to_reg),
-              onTap: () {
-                context.push("/signin");
-              },
-            )
-          ],
-        )),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromRGBO(0, 26, 44, 20),
-          onTap: (index) {
-            if (index == 0) {
-              context.go("/");
-              setState(() {
-                myindex = index;
-              });
-            }
-            if (index == 1) {
-              context.go("/adding-report");
-              setState(() {
-                myindex = index;
-              });
-            }
-          },
-          currentIndex: myindex,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add,
-              ),
-              label: 'Add',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Check URL',
-            ),
-          ],
-        ),
-        body: Container(
-          width: 400,
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                      "assets/images/cyber-network-1440x2560-internet-6k-18684.jpg"),
-                  fit: BoxFit.cover)),
-          child: context.watch<ReportProvider>().isLoading
-              ? Center(child: CircularProgressIndicator())
-              : ListView.builder(
-                  itemCount: context.watch<ReportProvider>().myReport.length,
-                  itemBuilder: ((context, index) => MainCard(
-                      myReport:
-                          context.watch<ReportProvider>().myReport[index]))),
-        ));
+            label: 'Add',
+          ),
+        ],
+      ),
+      body: TabBarView(controller: controller, children: [
+        ListPage(),
+        AddReportPage(),
+      ]),
+    );
   }
 }
