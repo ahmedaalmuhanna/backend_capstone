@@ -23,14 +23,6 @@ class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-        // ############ appBar ############ //
-
-        // ############ appBar ############ //
-
-        // ############ bottomNavigationBar ############ //
-
-        // ############ bottomNavigationBar ############ //
         body: Container(
       width: 400,
       alignment: Alignment.center,

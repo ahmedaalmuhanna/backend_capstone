@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage>
                   )))),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: controller.index,
-        onTap: (i) => controller.index = i,
+        onTap: (i) => setState(() => controller.index = i),
         backgroundColor: Color.fromRGBO(0, 26, 44, 20),
         items: [
           BottomNavigationBarItem(
