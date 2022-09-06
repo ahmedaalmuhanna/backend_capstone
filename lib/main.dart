@@ -5,7 +5,6 @@ import 'package:capstoe_frontend/pages/add_report_page.dart';
 import 'package:capstoe_frontend/pages/edit_profile_page.dart';
 import 'package:capstoe_frontend/pages/home_page.dart';
 import 'package:capstoe_frontend/pages/report_details.dart';
-
 import 'package:capstoe_frontend/pages/signin_page.dart';
 import 'package:capstoe_frontend/pages/signup_page.dart';
 import 'package:capstoe_frontend/providers/reports_provider.dart';
