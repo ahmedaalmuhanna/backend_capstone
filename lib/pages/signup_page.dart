@@ -13,40 +13,9 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Sign up"),
+          backgroundColor: Color.fromRGBO(0, 26, 44, 20),
+          title: Center(child: const Text("Sign Up")),
         ),
-        // resizeToAvoidBottomInset: false,
-        // body: Padding(
-        //   padding: const EdgeInsets.all(20.0),
-        //   child: Column(
-        //     children: [
-        //       const Text("Sign Up"),
-        //       TextField(
-        //         decoration: const InputDecoration(hintText: 'email'),
-        //         controller: emailController,
-        //       ),
-        //       TextField(
-        //         decoration: const InputDecoration(hintText: 'Username'),
-        //         controller: usernameController,
-        //       ),
-        //       TextField(
-        //         decoration: const InputDecoration(hintText: 'Password'),
-        //         controller: passwordController,
-        //         obscureText: true,
-        //       ),
-        //       ElevatedButton(
-        //         onPressed: () {
-        //           context.push("/");
-        //           context.read<AuthProvider>().signup(User(
-        //               username: usernameController.text,
-        //               email: emailController.text,
-        //               password: passwordController.text));
-        //         },
-        //         child: const Text("Sign Up"),
-        //       )
-        //     ],
-
-        //   ),
         resizeToAvoidBottomInset: false,
         body: Container(
             decoration: BoxDecoration(
@@ -76,6 +45,7 @@ class SignupPage extends StatelessWidget {
                             )),
                       ),
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -104,6 +74,7 @@ class SignupPage extends StatelessWidget {
                         height: 15,
                       ),
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -132,6 +103,7 @@ class SignupPage extends StatelessWidget {
                         height: 15,
                       ),
                       TextField(
+                        style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide:
@@ -157,14 +129,20 @@ class SignupPage extends StatelessWidget {
                         controller: passwordController,
                         obscureText: true,
                       ),
+                      SizedBox(
+                        height: 15,
+                      ),
                       ElevatedButton(
-                        onPressed: () {
-                          print('object');
-                          context.read<AuthProvider>().signup(User(
-                              username: usernameController.text,
-                              email: emailController.text,
-                              password: passwordController.text));
-                          context.push("/");
+                        onPressed: () async {
+                          var didLogin = await context
+                              .read<AuthProvider>()
+                              .signup(User(
+                                  username: usernameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text));
+                          if (didLogin) {
+                            context.replace("/homepage");
+                          }
                         },
                         child: const Text("Sign Up"),
                       )

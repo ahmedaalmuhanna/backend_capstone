@@ -25,4 +25,31 @@ class ReportService {
 
     return myReport;
   }
+
+  Future<Report> createReport({required Report myReport}) async {
+    late Report createdReport;
+    try {
+      FormData data = FormData.fromMap({
+        "title": myReport.title,
+        "refrtrmce": myReport.reference,
+        "details": myReport.details,
+        "time": myReport.time,
+        "cve": myReport.iocs.cve,
+        "url": myReport.iocs.url,
+        "domain": myReport.iocs.domain,
+        "ip    ": myReport.iocs.ip,
+        "md5   ": myReport.iocs.md5,
+        "sha1  ": myReport.iocs.sha1,
+        "sha256": myReport.iocs.sha256,
+        "email ": myReport.iocs.email,
+      });
+      Response myResponse =
+          await Client.dio.post('/api/reportcreate/', data: data);
+      print(myResponse.data);
+      createdReport = Report.fromMap(myResponse.data);
+    } on DioError catch (error) {
+      print(error);
+    }
+    return createdReport;
+  }
 }

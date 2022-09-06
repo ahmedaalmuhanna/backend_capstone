@@ -34,6 +34,7 @@ class SigninPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Text("Sign in"),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -45,6 +46,7 @@ class SigninPage extends StatelessWidget {
                         )),
                   ),
                   TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: Colors.white),
@@ -72,6 +74,7 @@ class SigninPage extends StatelessWidget {
                     height: 15,
                   ),
                   TextField(
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: Colors.white),
@@ -96,6 +99,9 @@ class SigninPage extends StatelessWidget {
                     controller: passwordController,
                     obscureText: true,
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   ElevatedButton(
                     onPressed: () async {
                       var isSuccess = await context.read<AuthProvider>().signin(
@@ -103,7 +109,7 @@ class SigninPage extends StatelessWidget {
                           password: passwordController.text);
 
                       if (isSuccess) {
-                        context.push("/");
+                        context.replace("/homepage");
                       }
                     },
                     child: Text(
@@ -111,7 +117,18 @@ class SigninPage extends StatelessWidget {
                       style:
                           TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        context.push('/signup');
+                      },
+                      child: Text(
+                        "SignUP",
+                        style: TextStyle(fontSize: 17, color: Colors.white),
+                      )),
                 ],
               ),
             ),
