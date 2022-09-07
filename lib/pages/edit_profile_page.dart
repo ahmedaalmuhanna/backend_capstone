@@ -88,18 +88,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               const SizedBox(
                 height: 25,
               ),
-              Center(
-                //************************************//
-                child: Container(
-                  child: SizedBox(
-                    width: 350,
-                    height: 125,
-                    child: Text(
-                      context.read<AuthProvider>().user!.bio,
-                    ),
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 25,
               ),
@@ -114,6 +102,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     controller: _bio,
                     decoration: InputDecoration(
                       hintText: "Write Your Bio In 30 Characters ...",
+                      labelText: 'Bio ',
+                      labelStyle: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 9, 15)),
+                      hintStyle: TextStyle(
+                          fontSize: 20.0,
+                          color: Color.fromARGB(132, 0, 26, 44)),
+                      focusColor: Colors.black,
                       contentPadding:
                           const EdgeInsets.symmetric(horizontal: 10),
                       filled: true,
@@ -127,7 +124,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Color(0xFF5F7161),
+                          color: Color.fromARGB(255, 0, 26, 44),
                         ),
                         borderRadius: BorderRadius.circular(5),
                       ),

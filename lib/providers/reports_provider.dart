@@ -16,7 +16,6 @@ class ReportProvider extends ChangeNotifier {
     try {
       reports = await ReportService().getReports();
       print("in provider2");
-      print(reports[0].profile.username);
     } finally {
       isLoading = false;
 
