@@ -16,7 +16,6 @@ class MainCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
           color: Color.fromARGB(255, 255, 255, 255),
@@ -25,13 +24,13 @@ class MainCard extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: 60,
             color: Colors.white,
             child: Card(
               child: Container(
-                width: 350,
                 // color: Color.fromARGB(255, 0, 26, 44),
                 decoration: BoxDecoration(
                     color: Color.fromARGB(255, 0, 26, 44),
@@ -48,7 +47,6 @@ class MainCard extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20),
-                      width: 60,
                       child: Text(
                         myReport.profile.username,
                         style: TextStyle(
@@ -108,6 +106,7 @@ class MainCard extends StatelessWidget {
             height: 10,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 margin: EdgeInsets.only(top: 15),

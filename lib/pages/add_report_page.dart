@@ -36,6 +36,8 @@ class _AddReportPageState extends State<AddReportPage> {
   final sha256Controller = TextEditingController();
   final emailController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,345 +72,490 @@ class _AddReportPageState extends State<AddReportPage> {
                       fit: BoxFit.cover)),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: titleController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Tilte',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: titleController,
+                          validator: (titleController) {
+                            if (titleController!.isEmpty) {
+                              return "Please fill out the title field";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'Type Your Report Title ..',
+                            labelText: 'Title ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: referenceController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 2, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Reference',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: referenceController,
+                          validator: (referenceController) {
+                            if (referenceController!.isEmpty) {
+                              return "Please fill out the reference field";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 2, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'Type Your Report Reference ..',
+                            labelText: 'Reference ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: detailsController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 10,
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Details',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: detailsController,
+                          validator: (detailsController) {
+                            if (detailsController!.isEmpty) {
+                              return "Please fill out the details field";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 10,
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'Type Your Report Details ..',
+                            labelText: 'Details ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Text(
-                        'IOCs',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Color.fromARGB(255, 255, 255, 255)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: domainController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Domain',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'IOCs ',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: ipController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'IP',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Fill the following IOCs.\nIf you do not have an IOC please type  " - " ',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(108, 240, 240, 240)),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: md5Controller,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'MD5',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: domainController,
+                          validator: (domainController) {
+                            if (domainController!.isEmpty) {
+                              return "Please fill out the domain field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'ex: google.com ',
+                            labelText: 'Domain',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: sha1Controller,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'SHA1',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: ipController,
+                          validator: (ipController) {
+                            if (ipController!.isEmpty) {
+                              return "Please fill out the IP field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'ex: 120.335.102.1 ',
+                            labelText: 'IP ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: sha256Controller,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'SHA256',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: md5Controller,
+                          validator: (md5Controller) {
+                            if (md5Controller!.isEmpty) {
+                              return "Please fill out the MD5 field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText: 'ex: 234fgbhnm45dfvgb3nmfvb5nm .. ',
+                            labelText: 'MD5 ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: emailController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'Email',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: sha1Controller,
+                          validator: (sha1Controller) {
+                            if (sha1Controller!.isEmpty) {
+                              return "Please fill out the SH1 field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
                             ),
+                            hintText:
+                                'ex: pojoiyiuguyft6yg3igigiouguyfyit4fugvg7jlhv4khg .. ',
+                            labelText: 'SHA1 ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
                           ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: urlController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'URL',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                        controller: cveController,
-                        style: TextStyle(color: Colors.white),
-                        minLines: 1, ///////
-                        maxLines: 40,
-                        keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 3, color: Colors.white),
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          hintText: 'CVE',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Color.fromARGB(255, 255, 255, 255)),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.teal,
-                            ),
-                          ),
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 0, 26, 44),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          await context.read<ReportProvider>().addReport(
-                                details: detailsController.text,
-                                title: titleController.text,
-                                reference: referenceController.text,
-                                cve: cveController.text,
-                                domain: domainController.text,
-                                email: emailController.text,
-                                ip: ipController.text,
-                                md5: md5Controller.text,
-                                sha1: sha1Controller.text,
-                                sha256: sha1Controller.text,
-                                url: urlController.text,
-                              );
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: sha256Controller,
+                          validator: (sha256Controller) {
+                            if (sha256Controller!.isEmpty) {
+                              return "Please fill out the SHA256 field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
 
-                          print("test");
-                          context.go('/homepage');
-                        },
-                        child: Text("SUBMIT"))
-                  ],
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText:
+                                'ex: dgfdpiugy4fgpiguyvkjnkjnpghiyg4325hovigcvo2gv4igv ...',
+                            labelText: 'SHA256 ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: emailController,
+                          validator: (emailController) {
+                            if (emailController!.isEmpty) {
+                              return "Please fill out the SHa256 field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: 'ex: Email@hotmail.com .. ',
+                            labelText: 'Email ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: urlController,
+                          validator: (urlController) {
+                            if (urlController!.isEmpty) {
+                              return "Please fill out the URL field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: 'ex: www.google.com .. ',
+                            labelText: 'URL ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextFormField(
+                          controller: cveController,
+                          validator: (cveController) {
+                            if (cveController!.isEmpty) {
+                              return "Please fill out the CVE field or type -";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: TextStyle(color: Colors.white),
+                          minLines: 1, ///////
+                          maxLines: 40,
+                          keyboardType: TextInputType.multiline,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 3, color: Colors.white),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: 'ex: CVE-2021-894421 .. ',
+                            labelText: 'CVE ',
+                            labelStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(255, 255, 255, 255)),
+                            hintStyle: TextStyle(
+                                fontSize: 20.0,
+                                color: Color.fromARGB(108, 240, 240, 240)),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.teal,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 0, 26, 44),
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () async {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+
+                            await context.read<ReportProvider>().addReport(
+                                  details: detailsController.text,
+                                  title: titleController.text,
+                                  reference: referenceController.text,
+                                  cve: cveController.text,
+                                  domain: domainController.text,
+                                  email: emailController.text,
+                                  ip: ipController.text,
+                                  md5: md5Controller.text,
+                                  sha1: sha1Controller.text,
+                                  sha256: sha1Controller.text,
+                                  url: urlController.text,
+                                );
+
+                            print("test");
+                            context.go('/homepage');
+                            print("test");
+                          },
+                          child: Text("SUBMIT"))
+                    ],
+                  ),
                 ),
               ))),
 

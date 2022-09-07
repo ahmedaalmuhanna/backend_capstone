@@ -17,7 +17,6 @@ class ReportService {
           await Client.dio.get("/api/reportlist/"); // path is the view path
       myReport =
           (myResponse.data as List).map((e) => Report.fromMap(e)).toList();
-      print(myReport[0].profile.username);
     } on DioError catch (error) {
       print("in error");
       print(error.message);
