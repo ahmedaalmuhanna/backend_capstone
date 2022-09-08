@@ -13,8 +13,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AddReportPage extends StatefulWidget {
-  const AddReportPage({Key? key}) : super(key: key);
-
+  const AddReportPage({Key? key, required this.onSubmit}) : super(key: key);
+  final void Function() onSubmit;
   @override
   State<AddReportPage> createState() => _AddReportPageState();
 }
@@ -550,7 +550,7 @@ class _AddReportPageState extends State<AddReportPage> {
                                 );
 
                             print("test");
-                            context.go('/homepage');
+                            widget.onSubmit();
                             print("test");
                           },
                           child: Text("SUBMIT"))

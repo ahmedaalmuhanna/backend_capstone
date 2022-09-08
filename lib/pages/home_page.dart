@@ -127,7 +127,11 @@ class _HomePageState extends State<HomePage>
       ),
       body: TabBarView(controller: controller, children: [
         ListPage(),
-        AddReportPage(),
+        AddReportPage(onSubmit: () {
+          setState(() {
+            controller.index = 0;
+          });
+        }),
       ]),
     );
   }

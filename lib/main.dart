@@ -51,10 +51,10 @@ class MyApp extends StatelessWidget {
             path: '/',
             builder: (context, state) => SigninPage(),
           ),
-          GoRoute(
-            path: '/adding-report',
-            builder: (context, state) => AddReportPage(),
-          ),
+          // GoRoute(
+          //   path: '/adding-report',
+          //   builder: (context, state) => AddReportPage(),
+          // ),
           GoRoute(
             path: '/report-details',
             builder: (context, state) => ReportDetailsPage(
