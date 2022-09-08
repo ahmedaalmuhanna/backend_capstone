@@ -19,6 +19,7 @@ class AuthProvider extends ChangeNotifier {
 //***************** SignUp */ */
   Future<bool> signup(User user) async {
     String token = "";
+    Client.dio.options.headers = {};
 
     try {
       Response response =
@@ -42,6 +43,7 @@ class AuthProvider extends ChangeNotifier {
     required String password,
   }) async {
     String token = "";
+    Client.dio.options.headers = {};
 
     try {
       Response response = await Client.dio.post('/api/login/', data: {
@@ -55,6 +57,7 @@ class AuthProvider extends ChangeNotifier {
     } on DioError catch (error) {
       token = "";
       print(error);
+      print(error.response?.data);
     }
 
     return false;
